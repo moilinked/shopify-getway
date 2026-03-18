@@ -69,6 +69,9 @@ func hostFromIssuer(issuer string) string {
 func shopFromHeader(r *http.Request) string {
 	shop := strings.TrimSpace(r.Header.Get("X-Shop-Domain"))
 	if shop == "" {
+		shop = strings.TrimSpace(r.Header.Get("X-Shopify-Shop-Domain"))
+	}
+	if shop == "" {
 		shop = strings.TrimSpace(r.Header.Get("Shop"))
 	}
 	if shop == "" {

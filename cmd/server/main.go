@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"flag"
+	"fmt"
 	"net/http"
 	"os/signal"
 	"syscall"
@@ -11,7 +12,6 @@ import (
 	"shopify-gateway/internal/config"
 	"shopify-gateway/internal/httpapi"
 	"shopify-gateway/internal/logger"
-	"shopify-gateway/internal/shopify"
 )
 
 func main() {
@@ -28,9 +28,7 @@ func main() {
 	}
 	defer logger.Close()
 
-	registrar := shopify.NewWebhookRegistrar(cfg.ShopifyAPIVersion, cfg.WebhookBaseURL, cfg.WebhookTopics)
-
-	router := httpapi.NewRouter(cfg, registrar)
+	router := httpapi.NewRouter(cfg)
 	server := &http.Server{
 		Addr:              ":" + cfg.Port,
 		Handler:           router,
@@ -41,6 +39,7 @@ func main() {
 	defer stop()
 
 	go func() {
+		fmt.Printf("server on: http://localhost:%s\n", cfg.Port)
 		logger.Log.Info().Str("addr", ":"+cfg.Port).Msgf("listening on http://localhost:%s", cfg.Port)
 		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			logger.Log.Fatal().Err(err).Msg("server error")
