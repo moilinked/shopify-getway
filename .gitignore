@@ -45,3 +45,5 @@ docker-data/
 .vscode/
 .DS_Store
 Thumbs.db
+
+config/config.yaml
