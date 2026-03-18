@@ -1,7 +1,6 @@
 package httpapi
 
 import (
-	"fmt"
 	"io"
 	"net/http"
 	"strings"
@@ -26,13 +25,10 @@ func HandleShopifyWebhook(w http.ResponseWriter, r *http.Request) {
 		Str("topic", topic).
 		Str("webhook_id", webhookID).
 		Int("bytes", len(body)).
+		Str("body", string(body)).
 		Msg("shopify webhook received")
 
-	fmt.Println(string(body))
-
-	if contentType := strings.TrimSpace(r.Header.Get("Content-Type")); contentType != "" {
-		w.Header().Set("Content-Type", contentType)
-	}
-	w.WriteHeader(http.StatusOK)
-	_, _ = w.Write(body)
+	RespondOK(w, map[string]any{
+		"ok": true,
+	})
 }
