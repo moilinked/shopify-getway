@@ -1,0 +1,9 @@
+port: "9998"
+shopify_api_key: "your-shopify-api-key"
+shopify_api_secret: "your-shopify-api-secret"
+shopify_api_version: "2025-01"
+webhook_base_url: "https://your-domain.example.com"
+webhook_topics:
+  - "APP_UNINSTALLED"
+debug_auth: true
+log_level: "debug"

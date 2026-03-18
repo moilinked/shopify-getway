@@ -1,0 +1,47 @@
+# Go build artifacts
+/server
+/server.exe
+/bin/
+/build/
+/dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.a
+
+# Go test / coverage / profiling
+*.test
+*.out
+coverage.out
+.coverprofile
+cover.out
+cpu.out
+mem.out
+*.prof
+
+# Runtime files
+/logs/
+/tmp/
+/temp/
+
+# Docker / container packaging artifacts
+.docker/
+.buildx-cache/
+docker-data/
+*.tar
+*.tar.gz
+*.tgz
+*.img
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Editor / OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

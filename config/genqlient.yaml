@@ -1,0 +1,14 @@
+schema:
+  - ../internal/shopify/schema.graphql
+
+operations:
+  - ../internal/shopify/queries/*.graphql
+
+generated: ../internal/shopify/generated.go
+package: shopify
+
+optional: pointer
+
+bindings:
+  URL:
+    type: string

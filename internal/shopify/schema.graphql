@@ -1,0 +1,70 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+scalar URL
+
+type Query {
+  webhookSubscriptions(first: Int, topics: [WebhookSubscriptionTopic!]): WebhookSubscriptionConnection!
+}
+
+type Mutation {
+  webhookSubscriptionCreate(topic: WebhookSubscriptionTopic!, webhookSubscription: WebhookSubscriptionInput!): WebhookSubscriptionCreatePayload
+  webhookSubscriptionDelete(id: ID!): WebhookSubscriptionDeletePayload
+}
+
+type WebhookSubscriptionConnection {
+  nodes: [WebhookSubscription!]!
+}
+
+type WebhookSubscription {
+  id: ID!
+  topic: WebhookSubscriptionTopic!
+  uri: URL!
+}
+
+type WebhookSubscriptionCreatePayload {
+  webhookSubscription: WebhookSubscription
+  userErrors: [UserError!]!
+}
+
+type WebhookSubscriptionDeletePayload {
+  deletedWebhookSubscriptionId: ID
+  userErrors: [UserError!]!
+}
+
+type UserError {
+  field: [String!]
+  message: String!
+}
+
+input WebhookSubscriptionInput {
+  format: WebhookSubscriptionFormat
+  uri: URL
+}
+
+enum WebhookSubscriptionFormat {
+  JSON
+  XML
+}
+
+enum WebhookSubscriptionTopic {
+  APP_UNINSTALLED
+  CUSTOMERS_DATA_REQUEST
+  CUSTOMERS_REDACT
+  SHOP_REDACT
+  SUBSCRIPTION_CONTRACTS_CREATE
+  SUBSCRIPTION_CONTRACTS_UPDATE
+  SUBSCRIPTION_CONTRACTS_ACTIVATE
+  SUBSCRIPTION_CONTRACTS_PAUSE
+  SUBSCRIPTION_CONTRACTS_CANCEL
+  SUBSCRIPTION_CONTRACTS_FAIL
+  SUBSCRIPTION_CONTRACTS_EXPIRE
+  SUBSCRIPTION_BILLING_ATTEMPTS_SUCCESS
+  SUBSCRIPTION_BILLING_ATTEMPTS_FAILURE
+  SUBSCRIPTION_BILLING_ATTEMPTS_CHALLENGED
+  CUSTOMER_PAYMENT_METHODS_CREATE
+  CUSTOMER_PAYMENT_METHODS_UPDATE
+  CUSTOMER_PAYMENT_METHODS_REVOKE
+}
