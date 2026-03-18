@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: shopify-gateway
     ports:
-      - "9998:9998"
+      - "9997:9997"
     volumes:
       - ./config:/app/config:ro
       - ./logs:/app/logs
