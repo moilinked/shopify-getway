@@ -1,8 +1,8 @@
+version: "3.9"
+
 services:
   shopify-gateway:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: shopify-gateway:latest
     container_name: shopify-gateway
     ports:
       - "9997:9997"
